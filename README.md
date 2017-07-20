@@ -60,3 +60,22 @@ ngOnChanges(changes: SimpleChanges) {
 ```
 
 > IMPORTANT: Angular only calls the hook when the value of the input property changes. It means when you pass and object `person` to the component and the last one changes the person's `name` property, angular won't report it as a change.
+
+#### DoCheck()
+
+Used to act upon changes that Angular doesn't catch on its own. We can say that it exceds the `OnChanges` hook.
+
+> You should not use both `DoCheck` and `OnChanges` to respond to changes on the same input.
+
+Sample:
+```
+ngDoCheck() {
+
+  if (this.hero.name !== this.oldHeroName) {
+    this.changeDetected = true;
+    this.changeLog.push(`DoCheck: Hero name changed to "${this.hero.name}" from "${this.oldHeroName}"`);
+    this.oldHeroName = this.hero.name;
+  }
+  //...
+}
+```
