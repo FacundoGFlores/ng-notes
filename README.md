@@ -41,3 +41,22 @@ ngOnDestroy() {
   this.uploadFileService.percentUpload$.unsubscribe();
 }
 ```
+
+#### OnChanges()
+
+Angular calls it whenever it detects changes to **input** properties of the component. The `ngOnChanges()` method takes and object that maps each changed property name to a `SimpleChange` object holding the current and previous property values.
+
+Sample:
+
+```
+ngOnChanges(changes: SimpleChanges) {
+  for (let propName in changes) {
+    let chng = changes[propName];
+    let cur  = JSON.stringify(chng.currentValue);
+    let prev = JSON.stringify(chng.previousValue);
+    this.changeLog.push(`${propName}: currentValue = ${cur}, previousValue = ${prev}`);
+  }
+}
+```
+
+> IMPORTANT: Angular only calls the hook when the value of the input property changes. It means when you pass and object `person` to the component and the last one changes the person's `name` property, angular won't report it as a change.
