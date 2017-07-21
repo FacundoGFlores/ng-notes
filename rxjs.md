@@ -75,4 +75,21 @@ users$.subscribe(
 )
 ```
 
+**Example 7:** Using Observables with Angular Services
 
+Component
+```
+users: Users[];
+constructor(usersService: UsersService){}
+ngOnInit(){
+  users$ = usersService.getUsers();
+  users$.subscribe(users => this.users = users);
+}
+```
+
+UsersService
+```
+getUsers(): Observable<User[]> {
+  return this.http.get('/users').map(response => response.json())
+}
+```
