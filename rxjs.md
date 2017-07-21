@@ -75,7 +75,7 @@ users$.subscribe(
 )
 ```
 
-**Example 8:** Using Observables with Angular Services
+**Example 7:** Using Observables with Angular Services
 
 Component
 ```
@@ -94,7 +94,7 @@ getUsers(): Observable<User[]> {
 }
 ```
 
-**Example 7:** Multiple requests 1
+**Example 8:** Multiple requests 1
 Suppose we want to send a new user to the server, we will probably want to refresh the list of users.
 ```
 const addUser$ = this.usersService.add(user);
