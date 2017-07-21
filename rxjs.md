@@ -75,7 +75,7 @@ users$.subscribe(
 )
 ```
 
-**Example 7:** Using Observables with Angular Services
+**Example 8:** Using Observables with Angular Services
 
 Component
 ```
@@ -118,3 +118,4 @@ NOTE: `async` pipe will automatically subscribe to the `users$` observable
 ```
 
 >IMPORTANT: if you are concatenating more than one Observables and you are using the `async` pipe, then you should probably need to add a `cache()` operator to avoid doing multiple subscriptions.
+
