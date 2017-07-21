@@ -94,10 +94,11 @@ getUsers(): Observable<User[]> {
 }
 ```
 
-**Example 8:** Multiple requests 1
+**Example 8:** Multiple requests I
+
 Suppose we want to send a new user to the server, we will probably want to refresh the list of users.
 ```
-const addUser$ = this.usersService.add(user);
+const addUser$ = this.usersService.addUser(user);
 const reloadUsers$ = this.usersService.getUsers();
 const updateUsers$ = Observable.concat(
   addUser$,
@@ -119,3 +120,11 @@ NOTE: `async` pipe will automatically subscribe to the `users$` observable
 
 >IMPORTANT: if you are concatenating more than one Observables and you are using the `async` pipe, then you should probably need to add a `cache()` operator to avoid doing multiple subscriptions.
 
+**Example 9:** Multiple requests II
+
+```
+this.users$ = this.usersService.addUser(user1)
+  .switchMap(result => this.usersService.addUser(user2))
+  .switchMap(() => this.usersService.getUsers())
+  .cache(); // avoid multiple GET
+```
