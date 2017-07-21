@@ -179,3 +179,39 @@ this.users$ = this.usersService.addUser(user1)
   .switchMap(() => this.usersService.getUsers())
   .cache(); // avoid multiple GET
 ```
+
+**Example 10:** Merge vs Concat
+
+Merge
+```
+squares$ = Rx.Observable.interval(1000).take(5).map(i => {return "square:" + i * i})
+cubes$ = Rx.Observable.interval(500).take(5).map(i => {return "cube:" + i * i * i})
+Rx.Observable.merge(squares$, cubes$).subscribe(console.log)
+// output
+// cube:0
+// square:0
+// cube:1
+// cube:8
+// square:1
+// cube:27
+// cube:64
+// square:4
+// square:9
+// square:16
+```
+
+Concat
+```
+Rx.Observable.concat(squares$, cubes$).subscribe(console.log)
+// output
+// square:0
+// square:1
+// square:4
+// square:9
+// square:16
+// cube:0
+// cube:1
+// cube:8
+// cube:27
+// cube:64
+```
