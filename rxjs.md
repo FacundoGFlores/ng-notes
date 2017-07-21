@@ -93,3 +93,28 @@ getUsers(): Observable<User[]> {
   return this.http.get('/users').map(response => response.json())
 }
 ```
+
+**Example 7:** Multiple requests 1
+Suppose we want to send a new user to the server, we will probably want to refresh the list of users.
+```
+const addUser$ = this.usersService.add(user);
+const reloadUsers$ = this.usersService.getUsers();
+const updateUsers$ = Observable.concat(
+  addUser$,
+  reloadUsers$
+);
+updateUsers$.subscribe(
+  () => {},
+  () => {},
+  () => {
+    this.users$ = reloadUsers$;
+  },
+)
+```
+NOTE: `async` pipe will automatically subscribe to the `users$` observable
+
+```
+<users-list [users]="users$ | async"><users-list>
+```
+
+>IMPORTANT: if you are concatenating more than one Observables and you are using the `async` pipe, then you should probably need to add a `cache()` operator to avoid doing multiple subscriptions.
