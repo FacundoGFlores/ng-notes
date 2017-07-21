@@ -2,7 +2,38 @@
 
 React programming: programming with event streams (sequence of events ocurrying over time). Whenever an event happens with can react to it doing something.
 
-Arrays can be used to simulate events.
+Some features for Observables
+
+1. Observables is lazily evaluated that can synchronously or asynchronously return zero to (potentially) infinite values from the time it's invoked onwards.
+2. Observables are like functions with zero arguments, but generalize those to allow multiple values.
+3. Subscribing to an Observable is analogous to calling a function
+
+```
+// function approach
+function foo() {
+  console.log('Hello World!');
+  return 150;
+}
+var x = foo.call();
+console.log(x);
+
+// observable approach
+var foo = Rx.Observable.create(function (observer) {
+  console.log('Hello World!');
+  observer.next(150);
+});
+foo.subscribe(function (x) {
+  console.log(x);
+});
+
+// response
+// "Hello World!"
+// "150"
+// "Hello World!"
+// "150"
+```
+
+### Working with Operators
 
 **Example 0:** Generate random infinite random numbers
 ```
