@@ -18,6 +18,12 @@ const observable = new Rx.Observable(observer => {
   })();
 });
 ```
+
+Or maybe you just want to use `rxjs`
+```
+Rx.Observable.interval(1000).take(Infinity).map(() => Math.random())
+```
+
 **Example 1:** Show events each 400ms.
 ```
 var src = Rx.Observable.interval(400).take(9)
