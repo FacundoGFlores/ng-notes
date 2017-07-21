@@ -32,6 +32,47 @@ var result = src
 
 > Reactive programming allows you to specify the dynamic behaviour of a value completely at the time of creation.
 
+**Example 4:** Using promise
 
+```
+const usersPromise = fetch('/users).then(res => res.json())
+const users$ = Observable.fromPromise(usersPromise)
+```
+We can pass arguments to the `subscribe` function:
+
+```
+  users$.subscribe(
+    users => ProcessNextValue(users),
+    error => HandleError(error),
+    () => HandleCompletion(),
+  )
+```
+
+**Example 5:** Creating observable from another observable
+```
+const firstUser$ = users$.map(users => users[0])
+```
+If we subscribe to the last observable the next value will be just one user.
+
+**Example 6:** Using Angular HTTP
+```
+const request$ = http.get('/users')
+```
+Here `request$` is an Observable so we can subscribe to it
+```
+request$.subscribe(
+  response => console.log(response)
+)
+```
+
+But most of the times we really want the data, for that we use the `map` operator
+```
+const users$ = http.get('/users').map(response => response.json())
+users$.subscribe(
+  users => console.log(users)
+  () => {},
+  () => console.log("completed!")
+)
+```
 
 
