@@ -4,6 +4,20 @@ React programming: programming with event streams (sequence of events ocurrying 
 
 Arrays can be used to simulate events.
 
+**Example 0:** Generate random infinite random numbers
+```
+const observable = new Rx.Observable(observer => {
+  (function generateRandomNumber() {
+    setTimeout(
+      () => {
+        observer.next(Math.random());
+        generateRandomNumber();
+      },
+      1000
+    );
+  })();
+});
+```
 **Example 1:** Show events each 400ms.
 ```
 var src = Rx.Observable.interval(400).take(9)
