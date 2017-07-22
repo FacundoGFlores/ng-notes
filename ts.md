@@ -128,3 +128,57 @@ type Person = (HasName & HasAddress) | null;
 ```
 
 > Important: The type `undefined` you really probably never want to use in your program directly, you probably want to define things like the `Person` type which combines either primitives types or app defined types such as `HasAddress` or `HasName` and `null`, so this explicitly excludes the type `undefined`, because `null` is not `undefined`.
+
+#### Generics
+
+A tool for creating reusable components, that is, being able to create a component that can work over a variety of types rather than a single one. This allows users to consume these components and use their own types.
+
+Non-Generic
+```
+let users: Users[] = [{}, {}, {}]
+```
+
+Generic
+```
+let users: Array<Users> = [{}, {}, {}]
+```
+
+So for example you may have:
+
+```
+function identity(arg: any): any {
+  return arg;
+}
+```
+
+Using `any` is certainly generic in the sense it accepts any and all types for the type of `arg`, we actually are losing the information about what that type was when the function returns. If we passed in a number, the only information we have is that any type could be returned.
+
+Instead, we need a way of capturing the type of the argument in such a way that we can alaso use it to denote what is being returned. So, we use a *type variable*, a special kind of variable that works on types rather than values.
+
+```
+function identity <T>(arg: T): T {
+  return arg;
+}
+```
+
+This allows us to traffic that type information in one side of the function and out the other.
+
+We say that this version of the `identity` function is generic, as it works over a range of types. Unlike using `any`, it's also just as precise (ie, it doesn't lose any information) as the first `identity` function that used numbers for the argument and return type.
+
+Now we can call the functionin one of two ways.
+
+1. To pass all of the arguments, including the type argument, to the function:
+
+```
+let output = identity<string>("hello world")
+```
+
+We explicitly set `T` to be `string` as one of the arguments to the function call, denoted using `<>` around the arguments rather than `()`.
+
+2. We use *type argument interface*, that is, we want the compiler to set the value of `T` for us automatically based on the type of the argument we pass in:
+
+```
+let output = identity("hello world)
+```
+
+
