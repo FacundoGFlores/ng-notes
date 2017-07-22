@@ -100,3 +100,24 @@ When you omit in `person` some of the properties declared in `HasName` type a co
 type HasName = {firstName?: string, lastName: string};
 ```
 
+> This feature allows you autocompletion.
+
+Now, you can compose types:
+
+```
+type HasAddress = {
+  street: string;
+
+
+type Person = {
+  name: HasName,
+  address?: HasAddress
+}
+
+let person: Person = {
+  name: {
+    lastName: 'Doe'
+  }
+}
+```
+
