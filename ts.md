@@ -34,5 +34,13 @@ const flag = true
 flag = false // error flag was previously declared
 ```
 
-> IMPORTANT: it doesn't work as we expect with objects.
+> IMPORTANT: it doesn't work as we expect with objects. Only the object reference is immutable.
+
+```
+const obj = {
+  flag: true
+}
+obj.flag = false //allowed
+obj = null // not allowed because the reference is const
+```
 
