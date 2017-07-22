@@ -121,3 +121,9 @@ let person: Person = {
 }
 ```
 
+#### Union and Insersection
+
+```
+type Person = (HasName & HasAddress) | null;
+```
+
