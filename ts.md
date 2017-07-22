@@ -202,3 +202,41 @@ interface IteratorResult<T> {
     value: T;
 }
 ```
+
+#### Generators
+
+They can be used to create lazy iterators e.g. the following function returns an infinite list of integers on demand:
+
+```
+function* infiniteSequence() {
+    var i = 0;
+    while(true) {
+        yield i++;
+    }
+}
+
+var iterator = infiniteSequence();
+while (true) {
+    console.log(iterator.next()); // { value: xxxx, done: false } forever and ever
+}
+```
+
+if the iterator does end, you get the result of `{done: true}`:
+
+```
+function* idMaker(){
+  let index = 0;
+  while(index < 3)
+    yield index++;
+}
+
+let gen = idMaker();
+
+console.log(gen.next()); // { value: 0, done: false }
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { done: true }
+```
+
+
+
