@@ -44,3 +44,43 @@ obj.flag = false //allowed
 obj = null // not allowed because the reference is const
 ```
 
+#### Object Destructuring
+
+When you want to build some data, you probably do something like:
+```
+function buildUserInfo(user) {
+  return user.userName + ' ' + user.email + ' ' + user.profileLink;
+}
+
+const userData = {
+  userName: 'JohnDoe',
+  email: 'john.doe@corporation.com',
+  profileLink: 'http://corporation.com/profiles/1'
+};
+
+const userInfo = buildUserInfo(userData);
+console.log(userInfo);
+```
+
+But it would better to use string literals.
+
+```
+function buildUserInfo(user) {
+  const userName = user.Username,
+        email = user.email,
+        profileLink = user.profileLink;
+  return `${userName} ${email} ${profileLink}`
+}
+```
+
+But with destructuring provides a more elegant solution
+
+```
+function buildUserInfo({userName, email, profileLink}) {
+  return `${userName} ${email} ${profileLink}`
+}
+```
+
+note that destructuring only supplies the properties of the object that we need.
+
+
