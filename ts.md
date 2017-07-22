@@ -83,4 +83,20 @@ function buildUserInfo({userName, email, profileLink}) {
 
 note that destructuring only supplies the properties of the object that we need.
 
+#### Types definitions
+
+```
+type HasName = {firstName: string, lastName: string};
+
+let person: HasName = {
+  firstName: 'John',
+  lastName: 'Doe'
+}
+```
+
+When you omit in `person` some of the properties declared in `HasName` type a compilation error will occur, so if you want to allow the `person` object to not declare some property you can use `?` in the type property declaration.
+
+```
+type HasName = {firstName?: string, lastName: string};
+```
 
