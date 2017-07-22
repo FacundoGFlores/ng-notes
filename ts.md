@@ -127,3 +127,4 @@ let person: Person = {
 type Person = (HasName & HasAddress) | null;
 ```
 
+> Important: The type `undefined` you really probably never want to use in your program directly, you probably want to define things like the `Person` type which combines either primitives types or app defined types such as `HasAddress` or `HasName` and `null`, so this explicitly excludes the type `undefined`, because `null` is not `undefined`.
