@@ -181,4 +181,24 @@ We explicitly set `T` to be `string` as one of the arguments to the function cal
 let output = identity("hello world)
 ```
 
+#### Iterators
 
+Iterator itself is not a TypeScript or ES6 feature, Iterator is a Behavioral Design Pattern common for Object oriented programming languages. It is, generally, an object which implements the following interface:
+
+```
+interface Iterator<T> {
+    next(value?: any): IteratorResult<T>;
+    return?(value?: any): IteratorResult<T>;
+    throw?(e?: any): IteratorResult<T>;
+}
+```
+
+This interface allows to retrieve a value from some collection or sequence which belongs to the object.
+The `IteratorResult` is simply a `value` + `done` pair:
+
+```
+interface IteratorResult<T> {
+    done: boolean;
+    value: T;
+}
+```
