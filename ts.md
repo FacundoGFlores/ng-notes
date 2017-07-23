@@ -238,5 +238,68 @@ console.log(gen.next()); // { value: 2, done: false }
 console.log(gen.next()); // { done: true }
 ```
 
+#### Async y Await
 
+When you care a function with the keyword `async`, that function will always return a Promise. 
+
+```
+async function getRandomNumber() {
+  return Math.random()
+}
+
+// same function but with promise
+function getRandomNumber() {
+  return Promise.resolve(Math.random)
+}
+```
+
+`Await` keyword allow us to pause the execution of an async function until it returns the result of the promise, hence it allow us to write readable asynchronous code and without cumbersome callbacks.
+
+```
+async function getUser(id) {
+  let user = await fetch(`/user/${id}`)
+  console.log(user.name)
+}
+
+// with promise
+function getUser(id) {
+  return fetch(
+    `/user/${id}`
+  ).then(user => console.log(user.name))
+}
+```
+
+There are some scenarios with concurrent calls for example:
+
+```
+function getUser(id) {
+  return fetch(`/user/${id}`)
+}
+
+function showUserNames() {
+  getUser(1).then(
+    user1 => {
+      console.log(user1.name);
+      getUser(2).then(
+        user2 => {
+          console.log(user2.name)
+          getUser(3).then(
+            user3 => {
+              console.log(user3.name)
+            })
+        })
+    })  
+}
+
+// with async
+
+async function showUserNames() {
+  const user1 = await getUser(1);
+  console.log(user1.name);
+  const user2 = await getUser(2);
+  console.log(user2.name);
+  const user3 = await getUser(3);
+  console.log(user3.name);
+}
+```
 
