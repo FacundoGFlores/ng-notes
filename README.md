@@ -5,11 +5,15 @@ Notes and resources links I've collected on Angular, TypeScript and RxJS, meant 
 ## Table of Contents
 
 #### Angular
-- [Angular notes](./ng-notes.md)
+- [Notes](./ng-notes.md)
 
 #### TypeScript
-- [TypeScript notes](./ts-notes.md)
+- [Notes](./ts-notes.md)
 
 #### RxJS
-- [RxJS notes](./rxjs-notes.md)
+- [Notes](./rxjs-notes.md)
+
+#### Functional Programming
+- [Notes](./fp-notes.md)
+- [Links](./fp-links.md)
 
