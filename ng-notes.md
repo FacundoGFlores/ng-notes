@@ -83,3 +83,21 @@ ngDoCheck() {
 ### Smart Components vs Presentation Components
 
 The main difference between those it the form they receive data from Services. Smart Components use constructor injection to lookup the entire service from the injector, while Presentation Components take the data from `@Inject` defined on their component class. Presentation components use inputs for passing data in, and these smart containers use the constructor for dependency injection to pass the services in.
+
+### Directives
+
+There are three types of directives in Angular:
+
+1. Attribute: Change the apprearance or behavior of an element.
+2. Structural: Change the DOM adding and removing DOM elements.
+3. Components: Directives that have a template.
+
+#### Structural Directives
+
+They are prefixed with an asterisk when being used which signals to Angular that the structure of the DOM elements within the directive may change depending on certain conditions. 
+
+> Why remove rather than hide? The difference between hiding and removing doesn't matter for displaying some fixed content. It does matter when the host element is attached to a resource intensive component. Such a component's behavior continues even when hidden. The component stays attached to its DOM element. It keeps listening to events. Angular keeps checking for changes that could affect data bindings. Whatever the component was doing, it keeps doing. Although invisible, the component—and all of its descendant components—tie up resources. The performance and memory burden can be substantial, responsiveness can degrade, and the user sees nothing. On the positive side, showing the element again is quick. The component's previous state is preserved and ready to display. The component doesn't re-initialize—an operation that could be expensive. So hiding and showing is sometimes the right thing to do.
+
+#### Attribute Directives
+
+They are surrounded by brackets which signals to Angular that the appearance or behavior of the DOM elements within the directive may change depending on certain conditions.
