@@ -79,3 +79,7 @@ ngDoCheck() {
   //...
 }
 ```
+
+### Smart Components vs Presentation Components
+
+The main difference between those it the form they receive data from Services. Smart Components use constructor injection to lookup the entire service from the injector, while Presentation Components take the data from `@Inject` defined on their component class. Presentation components use inputs for passing data in, and these smart containers use the constructor for dependency injection to pass the services in.
