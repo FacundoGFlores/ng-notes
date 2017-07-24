@@ -55,6 +55,31 @@ Or maybe you just want to use `rxjs`
 Rx.Observable.interval(1000).take(Infinity).map(() => Math.random())
 ```
 
+If you were comfortable with promises
+
+```
+promise.then(
+  successFn,
+  errorFn
+)
+
+observable.subscribe(
+  nextFn,
+  errorFn,
+  completeFn
+)
+```
+
+> without operators, observables are no scarier than promises
+
+So, what operator do I use?
+
+1. Use operator guide at: http://reactivex.io/rxjs
+2. Remember you don't have to Rx everything
+3. Take the operators you know to whatever point you can and do the rest imperatively.
+
+Start with: `map, filter, scan, mergeMap, switchMap, combineLatest, cocant, do`
+
 **Example 1:** Show events each 400ms.
 ```
 var src = Rx.Observable.interval(400).take(9)
