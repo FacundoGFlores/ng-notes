@@ -7,6 +7,9 @@ Notes and resources links I've collected on Angular, TypeScript and RxJS, meant 
 #### Angular
 - [Notes](./ng-notes.md)
 
+#### Angular Routing
+- [Notes](./routing-notes.md)
+
 #### TypeScript
 - [Notes](./ts-notes.md)
 
