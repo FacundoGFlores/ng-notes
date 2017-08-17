@@ -8,7 +8,7 @@ Some features for Observables
 2. Observables are like functions with zero arguments, but generalize those to allow multiple values.
 3. Subscribing to an Observable is analogous to calling a function
 
-```
+```javascript
 // function approach
 function foo() {
   console.log('Hello World!');
@@ -36,7 +36,7 @@ foo.subscribe(function (x) {
 ### Working with Operators
 
 **Example 0:** Generate random infinite random numbers
-```
+```javascript
 const observable = new Rx.Observable(observer => {
   (function generateRandomNumber() {
     setTimeout(
@@ -51,13 +51,13 @@ const observable = new Rx.Observable(observer => {
 ```
 
 Or maybe you just want to use `rxjs`
-```
+```javascript
 Rx.Observable.interval(1000).take(Infinity).map(() => Math.random())
 ```
 
 If you were comfortable with promises
 
-```
+```javascript
 promise.then(
   successFn,
   errorFn
@@ -81,14 +81,14 @@ So, what operator do I use?
 Start with: `map, filter, scan, mergeMap, switchMap, combineLatest, cocant, do`
 
 **Example 1:** Show events each 400ms.
-```
+```javascript
 var src = Rx.Observable.interval(400).take(9)
             .map(i => ['event 1', 'event 2', 0, 1, 'event 3'])
 src.subscribe(x => console.log(x)) // add event listener to src
 ```
 
 **Example 2:** Show only integers in the source
-```
+```javascript
 var src = ['1', 'event 1', '2', '3', 'event 2']
 var result = src
                 .map(x => parseInt(x))
@@ -97,7 +97,7 @@ var result = src
 ```
 
 **Example 3:** Get the sum of all integers
-```
+```javascript
 var src = ['1', 'event 1', '2', '3', 'event 2']
 var result = src
                 .map(x => parseInt(x))
@@ -110,13 +110,14 @@ var result = src
 
 **Example 4:** Using promise
 
-```
-const usersPromise = fetch('/users).then(res => res.json())
+```javascript
+const usersPromise = fetch('/users').then(res => res.json())
 const users$ = Observable.fromPromise(usersPromise)
 ```
+
 We can pass arguments to the `subscribe` function:
 
-```
+```javascript
   users$.subscribe(
     users => ProcessNextValue(users),
     error => HandleError(error),
@@ -125,24 +126,24 @@ We can pass arguments to the `subscribe` function:
 ```
 
 **Example 5:** Creating observable from another observable
-```
+```javascript
 const firstUser$ = users$.map(users => users[0])
 ```
 If we subscribe to the last observable the next value will be just one user.
 
 **Example 6:** Using Angular HTTP
-```
+```javascript
 const request$ = http.get('/users')
 ```
 Here `request$` is an Observable so we can subscribe to it
-```
+```javascript
 request$.subscribe(
   response => console.log(response)
 )
 ```
 
 But most of the times we really want the data, for that we use the `map` operator
-```
+```javascript
 const users$ = http.get('/users').map(response => response.json())
 users$.subscribe(
   users => console.log(users)
@@ -154,7 +155,7 @@ users$.subscribe(
 **Example 7:** Using Observables with Angular Services
 
 Component
-```
+```javascript
 users: Users[];
 constructor(usersService: UsersService){}
 ngOnInit(){
@@ -164,7 +165,7 @@ ngOnInit(){
 ```
 
 UsersService
-```
+```javascript
 getUsers(): Observable<User[]> {
   return this.http.get('/users').map(response => response.json())
 }
@@ -173,7 +174,7 @@ getUsers(): Observable<User[]> {
 **Example 8:** Multiple requests I
 
 Suppose we want to send a new user to the server, we will probably want to refresh the list of users.
-```
+```javascript
 const addUser$ = this.usersService.addUser(user);
 const reloadUsers$ = this.usersService.getUsers();
 const updateUsers$ = Observable.concat(
@@ -190,7 +191,7 @@ updateUsers$.subscribe(
 ```
 NOTE: `async` pipe will automatically subscribe to the `users$` observable
 
-```
+```javascript
 <users-list [users]="users$ | async"><users-list>
 ```
 
@@ -198,7 +199,7 @@ NOTE: `async` pipe will automatically subscribe to the `users$` observable
 
 **Example 9:** Multiple requests II
 
-```
+```javascript
 this.users$ = this.usersService.addUser(user1)
   .switchMap(result => this.usersService.addUser(user2))
   .switchMap(() => this.usersService.getUsers())
@@ -208,7 +209,7 @@ this.users$ = this.usersService.addUser(user1)
 **Example 10:** Merge vs Concat
 
 Merge
-```
+```javascript
 squares$ = Rx.Observable.interval(1000).take(5).map(i => {return "square:" + i * i})
 cubes$ = Rx.Observable.interval(500).take(5).map(i => {return "cube:" + i * i * i})
 Rx.Observable.merge(squares$, cubes$).subscribe(console.log)
@@ -226,7 +227,7 @@ Rx.Observable.merge(squares$, cubes$).subscribe(console.log)
 ```
 
 Concat
-```
+```javascript
 Rx.Observable.concat(squares$, cubes$).subscribe(console.log)
 // output
 // square:0
